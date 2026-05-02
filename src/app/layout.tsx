@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Open_Sans, Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
+import FloatingBookButton from "@/components/layout/FloatingBookButton";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -19,8 +22,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Cinnamon Spa & Massage | Mnarani Beach Cottages",
-  description: "Located at mnarani beach cottages, Zanzibar. Directly on the beach, our spa location and massage team will help you get rid of the tension.",
+  title: "Cinnamon Spa & Massage | Zanzibar",
+  description: "Located at Cinnamon Spa, Zanzibar. Directly on the beach, our spa location and massage team will help you get rid of the tension.",
+  icons: {
+    icon: "/assets/img/cinnamon-logo.jpeg",
+    apple: "/assets/img/cinnamon-logo.jpeg",
+  },
 };
 
 export default function RootLayout({
@@ -34,7 +41,10 @@ export default function RootLayout({
       className={`${openSans.variable} ${playfairDisplay.variable} ${poppins.variable} scroll-smooth`}
     >
       <body className="font-sans antialiased">
+        <Navbar />
         {children}
+        <Footer />
+        <FloatingBookButton />
       </body>
     </html>
   );
