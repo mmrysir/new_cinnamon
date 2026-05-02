@@ -96,7 +96,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-white relative">
+    <section id="services" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 md:mb-16 space-y-3">
           <h3 className="text-brand-accent uppercase tracking-[0.2em] text-[10px] font-bold">The Menu</h3>
@@ -180,16 +180,16 @@ export default function Services() {
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="relative bg-white w-full max-w-lg rounded-[2.5rem] overflow-hidden shadow-2xl"
+                className="relative bg-white w-full max-w-lg max-h-[90vh] flex flex-col rounded-[2.5rem] overflow-hidden shadow-2xl"
               >
                 <button 
                   onClick={() => setSelectedItem(null)}
-                  className="absolute top-6 right-6 z-20 bg-white/20 backdrop-blur-md p-2 rounded-full text-white hover:bg-white hover:text-brand-dark transition-all"
+                  className="absolute top-4 right-4 md:top-6 md:right-6 z-20 bg-white/20 backdrop-blur-md p-2 rounded-full text-white hover:bg-white hover:text-brand-dark transition-all"
                 >
                   <X size={24} />
                 </button>
 
-                <div className="relative h-64 md:h-72 w-full">
+                <div className="relative h-48 md:h-72 w-full shrink-0">
                   <Image 
                     src={selectedItem.image} 
                     alt={selectedItem.name} 
@@ -204,10 +204,10 @@ export default function Services() {
                   </div>
                 </div>
 
-                <div className="p-8 md:p-10 space-y-6">
-                  <div className="flex justify-between items-center">
-                    <span className="text-brand-accent font-bold text-2xl tracking-tighter">{selectedItem.price}</span>
-                    <span className="text-xs font-bold font-poppins uppercase tracking-[0.2em] text-gray-400">{selectedItem.category}</span>
+                <div className="p-6 md:p-10 space-y-4 md:space-y-6 flex-1 overflow-y-auto">
+                  <div className="flex flex-wrap justify-between items-center gap-2">
+                    <span className="text-brand-accent font-bold text-xl md:text-2xl tracking-tighter">{selectedItem.price}</span>
+                    <span className="text-[10px] md:text-xs font-bold font-poppins uppercase tracking-[0.2em] text-gray-400">{selectedItem.category}</span>
                   </div>
                   
                   <p className="text-gray-600 font-poppins leading-relaxed md:text-lg">

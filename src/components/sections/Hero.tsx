@@ -18,12 +18,12 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Content */}
-      <div className="container relative z-10 px-4 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between">
-        <div className="max-w-3xl space-y-8">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-white leading-tight">
-            Welcome to <span className="text-brand-accent">CINNAMON SPA AND MASSAGE</span>
+      <div className="container mx-auto relative z-10 px-4 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between">
+        <div className="max-w-3xl space-y-6 md:space-y-8 w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-white leading-tight break-words">
+            Welcome to <span className="text-brand-accent block mt-2">CINNAMON SPA AND MASSAGE</span>
           </h1>
-          <p className="text-xl md:text-2xl font-poppins font-light text-white/90 italic">
+          <p className="text-lg sm:text-xl md:text-2xl font-poppins font-light text-white/90 italic">
             Come as a guest, leave as a friend
           </p>
           

@@ -38,9 +38,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${playfairDisplay.variable} ${poppins.variable} scroll-smooth`}
+      className={`${openSans.variable} ${playfairDisplay.variable} ${poppins.variable} scroll-smooth overflow-x-hidden`}
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased overflow-x-hidden w-full">
         <Navbar />
         {children}
         <Footer />

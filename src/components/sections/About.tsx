@@ -25,7 +25,7 @@ export default function About() {
                 alt="Cinnamon Spa View" 
                 width={800} 
                 height={600} 
-                className="relative z-20 shadow-2xl rounded-sm object-cover"
+                className="relative z-20 shadow-2xl rounded-sm object-cover w-full h-auto"
               />
             </div>
           </div>
