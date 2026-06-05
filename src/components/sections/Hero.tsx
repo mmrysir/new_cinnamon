@@ -1,16 +1,28 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
-    <section id="hero" className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image with Parallax-like effect */}
       <div 
         className="absolute inset-0 bg-cover bg-center transition-transform duration-1000"
         style={{ 
           backgroundImage: "url('/assets/img/spabackground.jpeg')",
-          backgroundAttachment: 'fixed'
+          backgroundAttachment: isMobile ? 'scroll' : 'fixed'
         }}
       />
       

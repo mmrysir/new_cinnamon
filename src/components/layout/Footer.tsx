@@ -57,13 +57,13 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-playfair font-bold mb-8 decoration-brand-accent decoration-2 underline-offset-8 underline">Newsletter</h4>
             <p className="text-sm text-gray-400 mb-6">Stay updated with our latest offers and treatments.</p>
-            <form className="flex gap-2">
+            <form className="flex flex-col sm:flex-row gap-3">
               <input 
                 type="email" 
                 placeholder="Email Address" 
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl flex-1 outline-none focus:ring-1 focus:ring-brand-accent transition-all text-sm"
+                className="bg-white/5 border border-white/10 px-4 py-3 rounded-xl flex-1 outline-none focus:ring-1 focus:ring-brand-accent transition-all text-sm w-full"
               />
-              <button className="bg-brand-accent text-white px-6 py-3 rounded-xl text-xs font-bold uppercase hover:bg-brand-accent/80 transition-all">
+              <button className="bg-brand-accent text-white px-8 py-3 rounded-xl text-xs font-bold uppercase hover:bg-brand-accent/80 transition-all w-full sm:w-auto">
                 Join
               </button>
             </form>

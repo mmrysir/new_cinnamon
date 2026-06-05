@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,33 +76,68 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-brand-dark z-40 flex flex-col items-center justify-center gap-8 lg:hidden">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 bg-brand-dark z-[60] flex flex-col items-center justify-center gap-8 lg:hidden"
+          >
+            <div className="absolute top-6 left-6 flex items-center gap-3">
+              <Image 
+                src="/assets/img/cinnamon-logo.jpeg" 
+                alt="Logo" 
+                width={32} 
+                height={32} 
+                className="rounded-full"
+              />
+              <span className="text-white font-bold tracking-widest text-sm uppercase">Cinnamon Spa</span>
+            </div>
+
+            <button 
+              className="absolute top-6 right-6 text-white p-2"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-white text-2xl font-playfair hover:text-brand-accent transition-colors"
             >
-              {link.name}
-            </Link>
-          ))}
-          <Link 
-            href="#book" 
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="border-2 border-brand-accent text-white px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-widest mt-4"
-          >
-            Book Treatment
-          </Link>
-          <button 
-            className="absolute top-6 right-6 text-white text-4xl"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            ✕
-          </button>
-        </div>
-      )}
+              <X className="w-8 h-8" />
+            </button>
+
+            <nav className="flex flex-col items-center gap-6">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.1 }}
+                >
+                  <Link 
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-white text-3xl font-playfair hover:text-brand-accent transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Link 
+                href="#book" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="bg-brand-accent text-white px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest shadow-xl"
+              >
+                Book Now
+              </Link>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
