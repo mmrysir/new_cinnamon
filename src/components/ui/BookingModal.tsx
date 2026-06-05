@@ -16,8 +16,22 @@ export default function BookingModal() {
     updateDetails 
   } = useBooking();
 
+  const [isAddingMore, setIsAddingMore] = useState(false);
+
+  // We need the treatments list here too
+  const treatments = [
+    { id: 1, name: "Hands and Feet", price: "$25", image: "/assets/img/bg.jpeg" },
+    { id: 2, name: "African Facial", price: "$30", image: "/assets/img/six.jpg" },
+    { id: 3, name: "Herbal Oil", price: "$35", image: "/assets/img/five.jpg" },
+    { id: 4, name: "Stress Relief", price: "$15", image: "/assets/img/one.jpg" },
+    { id: 5, name: "Cinnamon Relax", price: "$30", image: "/assets/img/three.jpg" },
+    { id: 6, name: "Deep Tissue", price: "$40", image: "/assets/img/two.jpg" },
+    { id: 7, name: "Hot Stone", price: "$45", image: "/assets/img/four.jpg" },
+    { id: 8, name: "Detox Scrub", price: "$30", image: "/assets/img/detrox.jpg" }
+  ];
+
   const handleWhatsAppSend = () => {
-    const phone = "255712345678"; // Replace with real number
+    const phone = "255712345678"; 
     
     const servicesList = selectedServices.map(s => `- ${s.name} (${s.price})`).join("\n");
     const total = selectedServices.reduce((acc, s) => {
@@ -39,163 +53,196 @@ export default function BookingModal() {
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
-  if (selectedServices.length === 0 && isBookingOpen) {
-    return (
-      <Modal isOpen={isBookingOpen} onClose={closeBooking} title="Your Selection">
-        <div className="py-12 text-center space-y-4">
-          <div className="w-16 h-16 bg-brand-cream rounded-full flex items-center justify-center mx-auto text-brand-accent">
-            <Plus size={32} />
-          </div>
-          <h3 className="text-xl font-playfair font-bold text-brand-dark">Your selection is empty</h3>
-          <p className="text-gray-500 text-sm max-w-[200px] mx-auto">
-            Please select a treatment from our menu to begin your booking.
-          </p>
-          <button 
-            onClick={closeBooking}
-            className="mt-4 text-brand-accent font-bold uppercase tracking-widest text-xs hover:underline"
-          >
-            Go to Menu
-          </button>
-        </div>
-      </Modal>
-    );
-  }
+  const handleAddFromModal = (service: any) => {
+    addService(service);
+    // Visual feedback? maybe a small toast or just let it be added
+  };
 
   return (
     <Modal 
       isOpen={isBookingOpen} 
-      onClose={closeBooking} 
-      title="Complete Your Booking"
+      onClose={() => {
+        closeBooking();
+        setIsAddingMore(false);
+      }} 
+      title={isAddingMore ? "Add More Treatments" : "Complete Your Booking"}
       maxWidth="max-w-2xl"
     >
-      <div className="space-y-8">
-        {/* Step 1: Selected Services */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Selected Treatments</h4>
-            <span className="text-[10px] bg-brand-cream text-brand-accent px-2 py-0.5 rounded-full font-bold">
-              {selectedServices.length} Items
-            </span>
-          </div>
-          <div className="space-y-2">
-            {selectedServices.map((service) => (
-              <div 
-                key={service.id} 
-                className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-brand-accent/20 transition-all"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl overflow-hidden relative shrink-0">
-                    <img src={service.image} alt={service.name} className="object-cover w-full h-full" />
+      <div className="space-y-8 min-h-[400px]">
+        {isAddingMore ? (
+          <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {treatments.map((service) => {
+                const isSelected = selectedServices.find(s => s.id === service.id);
+                return (
+                  <div 
+                    key={service.id}
+                    className={`flex items-center justify-between p-3 rounded-2xl border transition-all cursor-pointer ${
+                      isSelected 
+                        ? "bg-brand-cream/20 border-brand-accent shadow-sm" 
+                        : "bg-gray-50 border-gray-100 hover:border-brand-accent/30"
+                    }`}
+                    onClick={() => handleAddFromModal(service)}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg overflow-hidden relative shrink-0">
+                        <img src={service.image} alt={service.name} className="object-cover w-full h-full" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-brand-dark text-xs leading-tight">{service.name}</h5>
+                        <p className="text-brand-accent font-bold text-[10px]">{service.price}</p>
+                      </div>
+                    </div>
+                    {isSelected ? (
+                      <div className="bg-brand-accent text-white p-1 rounded-full">
+                        <Plus className="w-3 h-3 rotate-45" onClick={(e) => {
+                          e.stopPropagation();
+                          removeService(service.id);
+                        }} />
+                      </div>
+                    ) : (
+                      <div className="bg-gray-200 text-gray-500 p-1 rounded-full group-hover:bg-brand-accent group-hover:text-white transition-colors">
+                        <Plus className="w-3 h-3" />
+                      </div>
+                    )}
                   </div>
-                  <div>
-                    <h5 className="font-playfair font-bold text-brand-dark text-sm leading-tight">{service.name}</h5>
-                    <p className="text-brand-accent font-bold text-xs">{service.price}</p>
+                );
+              })}
+            </div>
+            <button 
+              onClick={() => setIsAddingMore(false)}
+              className="w-full py-4 bg-brand-dark text-white rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-brand-accent transition-all shadow-xl"
+            >
+              Finish Selection ({selectedServices.length})
+            </button>
+          </div>
+        ) : (
+          <div className="animate-in fade-in slide-in-from-left-4 duration-300 space-y-8">
+            {/* Step 1: Selected Services */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Selected Treatments</h4>
+                <span className="text-[10px] bg-brand-cream text-brand-accent px-2 py-0.5 rounded-full font-bold">
+                  {selectedServices.length} Items
+                </span>
+              </div>
+              <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                {selectedServices.map((service) => (
+                  <div 
+                    key={service.id} 
+                    className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-brand-accent/20 transition-all"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden relative shrink-0">
+                        <img src={service.image} alt={service.name} className="object-cover w-full h-full" />
+                      </div>
+                      <div>
+                        <h5 className="font-playfair font-bold text-brand-dark text-sm leading-tight">{service.name}</h5>
+                        <p className="text-brand-accent font-bold text-xs">{service.price}</p>
+                      </div>
+                    </div>
+                    <button 
+                      onClick={() => removeService(service.id)}
+                      className="p-2 text-gray-300 hover:text-red-500 transition-colors"
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <button 
+                onClick={() => setIsAddingMore(true)}
+                className="w-full py-3 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400 text-xs font-bold uppercase tracking-widest hover:border-brand-accent/30 hover:text-brand-accent transition-all flex items-center justify-center gap-2"
+              >
+                <Plus size={14} /> Add Another Service
+              </button>
+            </div>
+
+            {/* Step 2: Details Form */}
+            <div className="space-y-6">
+              <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Appointment Details</h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Your Name</label>
+                  <input 
+                    type="text" 
+                    value={bookingDetails.name}
+                    onChange={(e) => updateDetails({ name: e.target.value })}
+                    placeholder="Full Name"
+                    className="w-full bg-gray-50 border border-gray-100 rounded-xl p-4 text-sm text-brand-dark font-medium focus:ring-2 focus:ring-brand-accent/20 transition-all placeholder:text-gray-400"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Preferred Date</label>
+                  <div className="relative flex items-center">
+                    <Calendar className="absolute left-4 w-4 h-4 text-brand-accent pointer-events-none" />
+                    <input 
+                      type="date" 
+                      value={bookingDetails.date}
+                      onChange={(e) => updateDetails({ date: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl p-4 pl-12 text-sm text-brand-dark font-medium focus:ring-2 focus:ring-brand-accent/20 transition-all"
+                    />
                   </div>
                 </div>
-                <button 
-                  onClick={() => removeService(service.id)}
-                  className="p-2 text-gray-300 hover:text-red-500 transition-colors"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-            ))}
-          </div>
-          <button 
-            onClick={closeBooking}
-            className="w-full py-3 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400 text-xs font-bold uppercase tracking-widest hover:border-brand-accent/30 hover:text-brand-accent transition-all flex items-center justify-center gap-2"
-          >
-            <Plus size={14} /> Add Another Service
-          </button>
-        </div>
 
-        {/* Step 2: Details Form */}
-        <div className="space-y-6">
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Appointment Details</h4>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Your Name</label>
-              <div className="relative">
-                <input 
-                  type="text" 
-                  value={bookingDetails.name}
-                  onChange={(e) => updateDetails({ name: e.target.value })}
-                  placeholder="Full Name"
-                  className="w-full bg-gray-50 border-none rounded-xl p-4 text-sm focus:ring-2 focus:ring-brand-accent/20 transition-all placeholder:text-gray-300"
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Preferred Time</label>
+                  <div className="relative flex items-center">
+                    <Clock className="absolute left-4 w-4 h-4 text-brand-accent pointer-events-none" />
+                    <input 
+                      type="time" 
+                      value={bookingDetails.time}
+                      onChange={(e) => updateDetails({ time: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl p-4 pl-12 text-sm text-brand-dark font-medium focus:ring-2 focus:ring-brand-accent/20 transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Guests</label>
+                  <div className="relative flex items-center">
+                    <Users className="absolute left-4 w-4 h-4 text-brand-accent pointer-events-none" />
+                    <select 
+                      value={bookingDetails.guests}
+                      onChange={(e) => updateDetails({ guests: e.target.value })}
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl p-4 pl-12 text-sm text-brand-dark font-medium focus:ring-2 focus:ring-brand-accent/20 transition-all appearance-none"
+                    >
+                      {[1, 2, 3, 4, 5].map(n => (
+                        <option key={n} value={n}>{n} {n === 1 ? 'Person' : 'People'}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Notes</label>
+                <textarea 
+                  value={bookingDetails.notes}
+                  onChange={(e) => updateDetails({ notes: e.target.value })}
+                  placeholder="Special requests..."
+                  rows={2}
+                  className="w-full bg-gray-50 border border-gray-100 rounded-xl p-4 text-sm text-brand-dark font-medium focus:ring-2 focus:ring-brand-accent/20 transition-all resize-none placeholder:text-gray-400"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Preferred Date</label>
-              <div className="relative flex items-center">
-                <Calendar className="absolute left-4 w-4 h-4 text-brand-accent" />
-                <input 
-                  type="date" 
-                  value={bookingDetails.date}
-                  onChange={(e) => updateDetails({ date: e.target.value })}
-                  className="w-full bg-gray-50 border-none rounded-xl p-4 pl-12 text-sm focus:ring-2 focus:ring-brand-accent/20 transition-all"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Preferred Time</label>
-              <div className="relative flex items-center">
-                <Clock className="absolute left-4 w-4 h-4 text-brand-accent" />
-                <input 
-                  type="time" 
-                  value={bookingDetails.time}
-                  onChange={(e) => updateDetails({ time: e.target.value })}
-                  className="w-full bg-gray-50 border-none rounded-xl p-4 pl-12 text-sm focus:ring-2 focus:ring-brand-accent/20 transition-all"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Number of People</label>
-              <div className="relative flex items-center">
-                <Users className="absolute left-4 w-4 h-4 text-brand-accent" />
-                <select 
-                  value={bookingDetails.guests}
-                  onChange={(e) => updateDetails({ guests: e.target.value })}
-                  className="w-full bg-gray-50 border-none rounded-xl p-4 pl-12 text-sm focus:ring-2 focus:ring-brand-accent/20 transition-all appearance-none"
-                >
-                  {[1, 2, 3, 4, 5].map(n => (
-                    <option key={n} value={n}>{n} {n === 1 ? 'Person' : 'People'}</option>
-                  ))}
-                </select>
-              </div>
+            <div className="pt-6 border-t border-gray-100">
+              <button 
+                onClick={handleWhatsAppSend}
+                disabled={selectedServices.length === 0}
+                className="w-full bg-[#25D366] disabled:bg-gray-300 text-white py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#128C7E] transition-all shadow-xl font-bold uppercase tracking-widest text-sm"
+              >
+                <MessageSquare size={20} />
+                Send to WhatsApp
+              </button>
             </div>
           </div>
-
-          <div className="space-y-2">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1">Special Notes (Optional)</label>
-            <textarea 
-              value={bookingDetails.notes}
-              onChange={(e) => updateDetails({ notes: e.target.value })}
-              placeholder="Any specific requests or allergies?"
-              rows={3}
-              className="w-full bg-gray-50 border-none rounded-xl p-4 text-sm focus:ring-2 focus:ring-brand-accent/20 transition-all placeholder:text-gray-300 resize-none"
-            />
-          </div>
-        </div>
-
-        {/* Footer Action */}
-        <div className="pt-6 border-t border-gray-100">
-          <button 
-            onClick={handleWhatsAppSend}
-            className="w-full bg-[#25D366] text-white py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#128C7E] transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 font-bold uppercase tracking-widest text-sm"
-          >
-            <MessageSquare size={20} />
-            Send Booking to WhatsApp
-          </button>
-          <p className="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-[0.1em]">
-            This will open WhatsApp to finalise your booking
-          </p>
-        </div>
+        )}
       </div>
     </Modal>
   );
 }
+
