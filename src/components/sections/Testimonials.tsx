@@ -57,6 +57,13 @@ const ReviewCard = ({ review }: { review: GoogleReview }) => {
       </div>
       
       <div className="flex flex-col items-center gap-4 pt-6">
+        {review.rating > 0 && (
+          <div className="flex text-yellow-500 text-sm mb-1">
+            {[...Array(5)].map((_, i) => (
+              <span key={i} className={i < review.rating ? "fill-current" : "opacity-30"}>★</span>
+            ))}
+          </div>
+        )}
         <div className="group relative">
           <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-brand-accent shadow-xl flex items-center justify-center bg-gray-800 transition-transform group-hover:scale-110">
             {review.avatar && !imgError ? (

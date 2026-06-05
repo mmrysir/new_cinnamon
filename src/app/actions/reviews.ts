@@ -5,6 +5,7 @@ export async function getCachedGoogleReviews() {
   const placeId = process.env.GOOGLE_BUSINESS_PLACE_ID; // Your place ID string
 
   if (!apiKey || !placeId) {
+    console.error("Reviews API Error: GOOGLE_MAPS_API_KEY or GOOGLE_BUSINESS_PLACE_ID is missing.");
     return { success: false, error: "Configuration Error: Missing environment tokens." };
   }
 
