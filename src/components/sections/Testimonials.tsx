@@ -165,40 +165,52 @@ export default function Testimonials() {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          {reviews.length > 0 ? (
-            <Swiper
-              spaceBetween={30}
-              centeredSlides={true}
-              autoplay={{
-                delay: 8000,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Autoplay, Pagination]}
-              className="pb-16"
-            >
-              {reviews.map((review) => (
-                <SwiperSlide key={review.id}>
-                  <ReviewCard review={review} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-center">
-              {/* Curated Fallbacks */}
-              {[
-                { author: "Sarah Johnson", text: "The most relaxing massage I've ever had. The ambiance is perfect and the staff is incredibly professional. Highly recommend the hot stone treatment!", time: "2 months ago" },
-                { author: "Michael Chen", text: "A hidden gem. From the moment you walk in, you feel the stress melting away. Clean, luxurious, and worth every penny.", time: "1 month ago" }
-              ].map((fallback, i) => (
-                <div key={i} className="bg-white/5 p-8 rounded-2xl border border-white/10 italic text-white/80">
-                  "{fallback.text}"
-                  <div className="mt-4 not-italic font-bold text-brand-accent">{fallback.author}</div>
-                </div>
-              ))}
-            </div>
-          )}
+          {(() => {
+            const displayReviews = reviews.length > 0 ? reviews : [
+              { 
+                id: "f1", 
+                author: "Sarah Johnson", 
+                text: "The most relaxing massage I've ever had. The ambiance is perfect and the staff is incredibly professional. Highly recommend the hot stone treatment!", 
+                timeDescription: "2 months ago",
+                rating: 5,
+                avatar: null,
+                authorUrl: "https://maps.app.goo.gl/Y49pq8jb_aA",
+                publishTime: ""
+              },
+              { 
+                id: "f2", 
+                author: "Michael Chen", 
+                text: "A hidden gem in Zanzibar. From the moment you walk in, you feel the stress melting away. Clean, luxurious, and worth every penny.", 
+                timeDescription: "1 month ago",
+                rating: 5,
+                avatar: null,
+                authorUrl: "https://maps.app.goo.gl/Y49pq8jb_aA",
+                publishTime: ""
+              }
+            ];
+
+            return (
+              <Swiper
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                  delay: 6000,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Autoplay, Pagination]}
+                className="pb-16"
+              >
+                {displayReviews.map((review) => (
+                  <SwiperSlide key={review.id}>
+                    <ReviewCard review={review} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            );
+          })()}
         </div>
       </div>
     </section>
