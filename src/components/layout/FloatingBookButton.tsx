@@ -15,9 +15,11 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
+import { useBooking } from "@/context/BookingContext";
+
 export default function FloatingBookButton() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const { openBooking } = useBooking();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -42,7 +44,7 @@ export default function FloatingBookButton() {
             exit={{ opacity: 0, scale: 0.5, y: 100 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => setIsOpen(true)}
+            onClick={() => openBooking()}
             className="fixed bottom-6 right-6 z-[90] bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center group"
             aria-label="Book on WhatsApp"
           >
@@ -53,22 +55,6 @@ export default function FloatingBookButton() {
           </motion.button>
         )}
       </AnimatePresence>
-
-      <Modal 
-        isOpen={isOpen} 
-        onClose={() => setIsOpen(false)} 
-        title="Book A Treatment"
-        maxWidth="max-w-4xl"
-      >
-        <div className="relative w-full h-[600px] md:h-[800px] bg-white rounded-xl overflow-hidden">
-          <iframe 
-            src="https://whatsform.com/SYsga5" 
-            className="absolute inset-0 w-full h-full border-0"
-            title="Booking Form"
-            allowFullScreen
-          ></iframe>
-        </div>
-      </Modal>
     </>
   );
 }

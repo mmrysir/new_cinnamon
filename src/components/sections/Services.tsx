@@ -4,16 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, MessageSquare, Clock, MapPin } from "lucide-react";
+import { useBooking } from "@/context/BookingContext";
+import { Treatment } from "@/types";
 
-type Treatment = {
-  id: number;
-  name: string;
-  price: string;
-  description: string;
-  image: string;
-  category: "all" | "massage" | "beauty" | "facial" | "scrub";
-};
-
+// Using shared Treatment type from @/types
 const treatments: Treatment[] = [
   {
     id: 1,
@@ -84,15 +78,16 @@ const treatments: Treatment[] = [
 export default function Services() {
   const [filter, setFilter] = useState<Treatment["category"]>("all");
   const [selectedItem, setSelectedItem] = useState<Treatment | null>(null);
+  const { openBooking } = useBooking();
 
   const filteredTreatments = filter === "all" 
     ? treatments 
-    : treatments.filter(t => t.category === filter);
+    : (treatments as Treatment[]).filter(t => t.category === filter);
 
-  const handleWhatsAppBook = (item: Treatment) => {
-    const phone = "255712345678"; 
-    const message = encodeURIComponent(`Hi Cinnamon Spa! I'm interested in booking the "${item.name}" treatment (${item.price}). Could you please share available slots?`);
-    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+  const handleBookingClick = (item: Treatment | null) => {
+    if (!item) return;
+    setSelectedItem(null); // Close the detail modal
+    openBooking(item);     // Open the booking form with this item
   };
 
   return (
@@ -216,11 +211,11 @@ export default function Services() {
 
                   <div className="pt-6">
                     <button 
-                      onClick={() => handleWhatsAppBook(selectedItem)}
+                      onClick={() => handleBookingClick(selectedItem)}
                       className="w-full bg-[#25D366] text-white py-4 md:py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#128C7E] transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 font-bold uppercase tracking-widest text-sm"
                     >
                       <MessageSquare size={20} />
-                      Book via WhatsApp
+                      Add to Booking
                     </button>
                     <p className="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-[0.1em]">
                       Secure your spot instantly

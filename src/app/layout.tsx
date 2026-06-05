@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   },
 };
 
+import { BookingProvider } from "@/context/BookingContext";
+import BookingModal from "@/components/ui/BookingModal";
+import BookingCartIndicator from "@/components/layout/BookingCartIndicator";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,10 +45,14 @@ export default function RootLayout({
       className={`${openSans.variable} ${playfairDisplay.variable} ${poppins.variable} scroll-smooth overflow-x-hidden`}
     >
       <body className="font-sans antialiased overflow-x-hidden w-full">
-        <Navbar />
-        {children}
-        <Footer />
-        <FloatingBookButton />
+        <BookingProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <FloatingBookButton />
+          <BookingCartIndicator />
+          <BookingModal />
+        </BookingProvider>
       </body>
     </html>
   );
