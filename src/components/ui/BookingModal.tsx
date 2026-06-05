@@ -31,7 +31,7 @@ export default function BookingModal() {
   ];
 
   const handleWhatsAppSend = () => {
-    const phone = "255712345678"; 
+    const phone = "255776583434"; 
     
     const servicesList = selectedServices.map(s => `- ${s.name} (${s.price})`).join("\n");
     const total = selectedServices.reduce((acc, s) => {
