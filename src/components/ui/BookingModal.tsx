@@ -2,8 +2,11 @@
 
 import { useBooking } from "@/context/BookingContext";
 import Modal from "./Modal";
-import { X, Plus, Minus, Send, Calendar, Clock, Users, MessageSquare } from "lucide-react";
+import { X, Plus, Calendar, Clock, Users, MessageSquare } from "lucide-react";
+import { Treatment } from "@/types";
+import { treatments } from "@/data/treatments";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function BookingModal() {
   const { 
@@ -18,17 +21,7 @@ export default function BookingModal() {
 
   const [isAddingMore, setIsAddingMore] = useState(false);
 
-  // We need the treatments list here too
-  const treatments = [
-    { id: 1, name: "Hands and Feet", price: "$25", image: "/assets/img/bg.jpeg" },
-    { id: 2, name: "African Facial", price: "$30", image: "/assets/img/six.jpg" },
-    { id: 3, name: "Herbal Oil", price: "$35", image: "/assets/img/five.jpg" },
-    { id: 4, name: "Stress Relief", price: "$15", image: "/assets/img/one.jpg" },
-    { id: 5, name: "Cinnamon Relax", price: "$30", image: "/assets/img/three.jpg" },
-    { id: 6, name: "Deep Tissue", price: "$40", image: "/assets/img/two.jpg" },
-    { id: 7, name: "Hot Stone", price: "$45", image: "/assets/img/four.jpg" },
-    { id: 8, name: "Detox Scrub", price: "$30", image: "/assets/img/detrox.jpg" }
-  ];
+
 
   const handleWhatsAppSend = () => {
     const phone = "255776583434"; 
@@ -53,7 +46,7 @@ export default function BookingModal() {
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
-  const handleAddFromModal = (service: any) => {
+  const handleAddFromModal = (service: Treatment) => {
     addService(service);
     // Visual feedback? maybe a small toast or just let it be added
   };
@@ -86,7 +79,7 @@ export default function BookingModal() {
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg overflow-hidden relative shrink-0">
-                        <img src={service.image} alt={service.name} className="object-cover w-full h-full" />
+                        <Image src={service.image} alt={service.name} fill className="object-cover" />
                       </div>
                       <div>
                         <h5 className="font-bold text-brand-dark text-xs leading-tight">{service.name}</h5>
@@ -134,7 +127,7 @@ export default function BookingModal() {
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-xl overflow-hidden relative shrink-0">
-                        <img src={service.image} alt={service.name} className="object-cover w-full h-full" />
+                        <Image src={service.image} alt={service.name} fill className="object-cover" />
                       </div>
                       <div>
                         <h5 className="font-playfair font-bold text-brand-dark text-sm leading-tight">{service.name}</h5>

@@ -70,8 +70,28 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 font-poppins">
-          <p>© {new Date().getFullYear()} Cinnamon Spa. All Rights Reserved.</p>
+        <div className="border-t border-white/5 py-12">
+          <h4 className="text-center text-lg font-playfair font-bold mb-8 uppercase tracking-widest text-brand-accent">
+            Our Partners & Sponsors
+          </h4>
+          <div className="flex justify-center items-center gap-12">
+            <a href="https://mnaranibeachcottages.tz-zanzibar.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-4 group">
+              <div className="bg-white/5 p-6 rounded-2xl border border-white/10 group-hover:bg-white group-hover:border-white transition-all duration-500">
+                <Image 
+                  src="/assets/img/Mnarani-Logo-Small.jpg" 
+                  alt="Mnarani Beach Cottages" 
+                  width={160} 
+                  height={80} 
+                  className="object-contain transition-all duration-500"
+                />
+              </div>
+              <span className="text-sm font-poppins text-gray-400 group-hover:text-brand-accent transition-colors">Mnarani Beach Cottages</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 font-poppins">
+          <p>© {new Date().getFullYear()} mugogoinc all rights reserved.</p>
         </div>
       </div>
     </footer>

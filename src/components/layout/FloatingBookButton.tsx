@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import Modal from "../ui/Modal";
 
 // WhatsApp SVG Icon
 const WhatsAppIcon = () => (

@@ -1,0 +1,36 @@
+
+> new_cinnamon@0.1.0 lint
+> eslint
+
+
+/home/mugogoinc/myenv/Desktop/mnarani/new_cinnamon/src/app/actions/reviews.ts
+  32:23  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:19  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:27  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  53:12  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+/home/mugogoinc/myenv/Desktop/mnarani/new_cinnamon/src/components/layout/FloatingBookButton.tsx
+  5:8  warning  'Modal' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/mugogoinc/myenv/Desktop/mnarani/new_cinnamon/src/components/sections/Services.tsx
+    6:28  warning  'Clock' is defined but never used         @typescript-eslint/no-unused-vars
+    6:35  warning  'MapPin' is defined but never used        @typescript-eslint/no-unused-vars
+  104:49  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/mugogoinc/myenv/Desktop/mnarani/new_cinnamon/src/components/sections/Testimonials.tsx
+  40:148  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  56:153  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  70:15   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/mugogoinc/myenv/Desktop/mnarani/new_cinnamon/src/components/ui/BookingModal.tsx
+    5:19  warning  'Minus' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+    5:26  warning  'Send' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   56:40  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   89:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  137:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/home/mugogoinc/myenv/Desktop/mnarani/new_cinnamon/src/context/BookingContext.tsx
+  3:54  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 17 problems (7 errors, 10 warnings)
+

@@ -1,5 +1,20 @@
 'use server'
 
+interface GoogleReviewResponse {
+  name: string;
+  authorAttribution?: {
+    displayName?: string;
+    photoUri?: string;
+    uri?: string;
+  };
+  rating?: number;
+  text?: {
+    text?: string;
+  };
+  relativePublishTimeDescription?: string;
+  publishTime: string;
+}
+
 export async function getCachedGoogleReviews() {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   const placeId = process.env.GOOGLE_BUSINESS_PLACE_ID; // Your place ID string
@@ -29,7 +44,7 @@ export async function getCachedGoogleReviews() {
     if (res.ok) {
       // Structure formatting: we normalize the data map here so your UI layer stays clean
       const normalizedReviews = (data.reviews || [])
-        .map((review: any) => ({
+        .map((review: GoogleReviewResponse) => ({
           id: review.name, // Format: "places/PLACE_ID/reviews/REVIEW_ID"
           author: review.authorAttribution?.displayName || "Anonymous",
           avatar: review.authorAttribution?.photoUri || null,
@@ -39,7 +54,9 @@ export async function getCachedGoogleReviews() {
           timeDescription: review.relativePublishTimeDescription || "Recently",
           publishTime: review.publishTime // ISO format for sorting
         }))
-        .sort((a: any, b: any) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime());
+        .sort((a: { publishTime: string }, b: { publishTime: string }) => 
+          new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()
+        );
 
       return {
         success: true,
@@ -50,7 +67,7 @@ export async function getCachedGoogleReviews() {
     } else {
       return { success: false, error: data.error?.message || "Places API error encountered." };
     }
-  } catch (err) {
+  } catch {
     return { success: false, error: "Network connection lost to cloud endpoint." };
   }
 }
