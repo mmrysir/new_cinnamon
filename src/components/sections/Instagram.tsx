@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Heart, MessageCircle } from "lucide-react";
+
 
 const InstagramIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg 
@@ -124,11 +124,11 @@ export default function Instagram() {
               <div className="absolute inset-0 bg-brand-dark/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-4 text-white">
                 <div className="flex items-center gap-6">
                   <div className="flex items-center gap-1">
-                    <Heart size={18} className="fill-white" />
+                    <span className="material-symbols-outlined text-[18px] text-white" style={{ fontVariationSettings: "'FILL' 1" }}>favorite</span>
                     <span className="text-xs font-bold font-poppins">{post.likes}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <MessageCircle size={18} className="fill-white" />
+                    <span className="material-symbols-outlined text-[18px] text-white" style={{ fontVariationSettings: "'FILL' 1" }}>chat_bubble</span>
                     <span className="text-xs font-bold font-poppins">{post.comments}</span>
                   </div>
                 </div>

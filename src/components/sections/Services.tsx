@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MessageSquare } from "lucide-react";
+
 import { useBooking } from "@/context/BookingContext";
 import { Treatment } from "@/types";
 
@@ -116,7 +116,7 @@ export default function Services() {
                   onClick={() => setSelectedItem(null)}
                   className="absolute top-4 right-4 md:top-6 md:right-6 z-20 bg-white/20 backdrop-blur-md p-2 rounded-full text-white hover:bg-white hover:text-brand-dark transition-all"
                 >
-                  <X size={24} />
+                  <span className="material-symbols-outlined text-[24px]">close</span>
                 </button>
 
                 <div className="relative h-48 md:h-72 w-full shrink-0">
@@ -149,7 +149,7 @@ export default function Services() {
                       onClick={() => handleBookingClick(selectedItem)}
                       className="w-full bg-[#25D366] text-white py-4 md:py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#128C7E] transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 font-bold uppercase tracking-widest text-sm"
                     >
-                      <MessageSquare size={20} />
+                      <span className="material-symbols-outlined text-[20px]">chat</span>
                       Add to Booking
                     </button>
                     <p className="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-[0.1em]">

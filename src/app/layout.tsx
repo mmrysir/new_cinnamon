@@ -44,6 +44,9 @@ export default function RootLayout({
       lang="en"
       className={`${openSans.variable} ${playfairDisplay.variable} ${poppins.variable} scroll-smooth overflow-x-hidden`}
     >
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet" />
+      </head>
       <body className="font-sans antialiased overflow-x-hidden w-full">
         <BookingProvider>
           <Navbar />

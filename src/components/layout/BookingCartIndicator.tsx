@@ -2,7 +2,7 @@
 
 import { useBooking } from "@/context/BookingContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
+
 
 export default function BookingCartIndicator() {
   const { selectedServices, openBooking } = useBooking();
@@ -23,7 +23,7 @@ export default function BookingCartIndicator() {
             className="pointer-events-auto group relative bg-brand-dark text-white p-4 rounded-r-2xl rounded-l-md shadow-[10px_0_30px_rgba(0,0,0,0.2)] border-l-4 border-brand-accent flex items-center gap-3 transition-all hover:bg-brand-accent hover:border-brand-dark"
           >
             <div className="relative">
-              <ShoppingBag className="w-6 h-6" />
+              <span className="material-symbols-outlined text-[24px]">local_mall</span>
               <motion.span
                 key={count}
                 initial={{ scale: 1.5, backgroundColor: "#c5a572" }}

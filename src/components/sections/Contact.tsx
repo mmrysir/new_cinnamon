@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+
 
 export default function Contact() {
   return (
@@ -15,7 +15,7 @@ export default function Contact() {
           <div className="space-y-8">
             <div className="flex gap-4 group">
               <div className="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent transition-colors group-hover:bg-brand-accent group-hover:text-white">
-                <MapPin size={20} />
+                <span className="material-symbols-outlined text-[20px]">location_on</span>
               </div>
               <div>
                 <h4 className="text-lg font-playfair font-bold text-gray-900">Location</h4>
@@ -25,7 +25,7 @@ export default function Contact() {
 
             <div className="flex gap-4 group">
               <div className="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent transition-colors group-hover:bg-brand-accent group-hover:text-white">
-                <Clock size={20} />
+                <span className="material-symbols-outlined text-[20px]">schedule</span>
               </div>
               <div>
                 <h4 className="text-lg font-playfair font-bold text-gray-900">Open Hours</h4>
@@ -35,7 +35,7 @@ export default function Contact() {
 
             <div className="flex gap-4 group">
               <div className="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent transition-colors group-hover:bg-brand-accent group-hover:text-white">
-                <Mail size={20} />
+                <span className="material-symbols-outlined text-[20px]">mail</span>
               </div>
               <div>
                 <h4 className="text-lg font-playfair font-bold text-gray-900">Email</h4>
@@ -45,7 +45,7 @@ export default function Contact() {
 
             <div className="flex gap-4 group">
               <div className="w-12 h-12 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent transition-colors group-hover:bg-brand-accent group-hover:text-white">
-                <Phone size={20} />
+                <span className="material-symbols-outlined text-[20px]">call</span>
               </div>
               <div>
                 <h4 className="text-lg font-playfair font-bold text-gray-900">Call</h4>

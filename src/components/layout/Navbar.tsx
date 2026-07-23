@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -100,7 +100,7 @@ export default function Navbar() {
               className="absolute top-6 right-6 text-white p-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <X className="w-8 h-8" />
+              <span className="material-symbols-outlined text-[32px]">close</span>
             </button>
 
             <nav className="flex flex-col items-center gap-6">

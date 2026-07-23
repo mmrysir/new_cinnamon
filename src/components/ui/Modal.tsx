@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+
 import { useEffect } from "react";
 
 interface ModalProps {
@@ -55,7 +55,7 @@ export default function Modal({ isOpen, onClose, children, title, maxWidth = "ma
                   onClick={onClose}
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <span className="material-symbols-outlined text-[20px] text-gray-500">close</span>
                 </button>
               </div>
 

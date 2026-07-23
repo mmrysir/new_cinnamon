@@ -2,7 +2,7 @@
 
 import { useBooking } from "@/context/BookingContext";
 import Modal from "./Modal";
-import { X, Plus, Calendar, Clock, Users, MessageSquare } from "lucide-react";
+
 import { Treatment } from "@/types";
 import { treatments } from "@/data/treatments";
 import { useState } from "react";
@@ -88,14 +88,14 @@ export default function BookingModal() {
                     </div>
                     {isSelected ? (
                       <div className="bg-brand-accent text-white p-1 rounded-full">
-                        <Plus className="w-3 h-3 rotate-45" onClick={(e) => {
+                        <span className="material-symbols-outlined text-[12px] rotate-45" onClick={(e) => {
                           e.stopPropagation();
                           removeService(service.id);
-                        }} />
+                        }}>add</span>
                       </div>
                     ) : (
                       <div className="bg-gray-200 text-gray-500 p-1 rounded-full group-hover:bg-brand-accent group-hover:text-white transition-colors">
-                        <Plus className="w-3 h-3" />
+                        <span className="material-symbols-outlined text-[12px]">add</span>
                       </div>
                     )}
                   </div>
@@ -138,7 +138,7 @@ export default function BookingModal() {
                       onClick={() => removeService(service.id)}
                       className="p-2 text-gray-300 hover:text-red-500 transition-colors"
                     >
-                      <X size={18} />
+                      <span className="material-symbols-outlined text-[18px]">close</span>
                     </button>
                   </div>
                 ))}
@@ -147,7 +147,7 @@ export default function BookingModal() {
                 onClick={() => setIsAddingMore(true)}
                 className="w-full py-3 border-2 border-dashed border-gray-200 rounded-2xl text-gray-400 text-xs font-bold uppercase tracking-widest hover:border-brand-accent/30 hover:text-brand-accent transition-all flex items-center justify-center gap-2"
               >
-                <Plus size={14} /> Add Another Service
+                <span className="material-symbols-outlined text-[14px]">add</span> Add Another Service
               </button>
             </div>
 
@@ -170,7 +170,7 @@ export default function BookingModal() {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Preferred Date</label>
                   <div className="relative flex items-center">
-                    <Calendar className="absolute left-4 w-4 h-4 text-brand-accent pointer-events-none" />
+                    <span className="material-symbols-outlined absolute left-4 text-[16px] text-brand-accent pointer-events-none">calendar_month</span>
                     <input 
                       type="date" 
                       value={bookingDetails.date}
@@ -183,7 +183,7 @@ export default function BookingModal() {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Preferred Time</label>
                   <div className="relative flex items-center">
-                    <Clock className="absolute left-4 w-4 h-4 text-brand-accent pointer-events-none" />
+                    <span className="material-symbols-outlined absolute left-4 text-[16px] text-brand-accent pointer-events-none">schedule</span>
                     <input 
                       type="time" 
                       value={bookingDetails.time}
@@ -196,7 +196,7 @@ export default function BookingModal() {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-brand-dark ml-1 italic opacity-70">Guests</label>
                   <div className="relative flex items-center">
-                    <Users className="absolute left-4 w-4 h-4 text-brand-accent pointer-events-none" />
+                    <span className="material-symbols-outlined absolute left-4 text-[16px] text-brand-accent pointer-events-none">group</span>
                     <select 
                       value={bookingDetails.guests}
                       onChange={(e) => updateDetails({ guests: e.target.value })}
@@ -228,7 +228,7 @@ export default function BookingModal() {
                 disabled={selectedServices.length === 0}
                 className="w-full bg-[#25D366] disabled:bg-gray-300 text-white py-5 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#128C7E] transition-all shadow-xl font-bold uppercase tracking-widest text-sm"
               >
-                <MessageSquare size={20} />
+                <span className="material-symbols-outlined text-[20px]">chat</span>
                 Send to WhatsApp
               </button>
             </div>
