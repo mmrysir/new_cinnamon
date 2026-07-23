@@ -75,7 +75,7 @@ export default function Footer() {
             Our Partners & Sponsors
           </h4>
           <div className="flex justify-center items-center gap-12">
-            <a href="https://mnaranibeachcottages.tz-zanzibar.com/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-4 group">
+            <a href="https://www.lighthousezanzibar.com" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-4 group">
               <div className="bg-white/5 p-6 rounded-2xl border border-white/10 group-hover:bg-white group-hover:border-white transition-all duration-500">
                 <Image 
                   src="/assets/img/Mnarani-Logo-Small.jpg" 
