@@ -35,7 +35,7 @@ import { BookingProvider } from "@/context/BookingContext";
 import BookingModal from "@/components/ui/BookingModal";
 import BookingCartIndicator from "@/components/layout/BookingCartIndicator";
 
-import seoData from "../../../seo.json";
+import seoData from "../../seo.json";
 
 export default function RootLayout({
   children,
