@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans, Playfair_Display, Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import FloatingBookButton from "@/components/layout/FloatingBookButton";
 import Navbar from "@/components/layout/Navbar";
@@ -34,6 +35,8 @@ import { BookingProvider } from "@/context/BookingContext";
 import BookingModal from "@/components/ui/BookingModal";
 import BookingCartIndicator from "@/components/layout/BookingCartIndicator";
 
+import seoData from "../../../seo.json";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -46,7 +49,24 @@ export default function RootLayout({
     >
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(seoData) }}
+        />
       </head>
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-DBHJHSSD4Q"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-DBHJHSSD4Q');
+        `}
+      </Script>
       <body className="font-sans antialiased overflow-x-hidden w-full">
         <BookingProvider>
           <Navbar />

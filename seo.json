@@ -2,43 +2,55 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Person",
+      "@id": "https://www.berinajumwa.com/#owner",
+      "name": "Berina Jumwa",
+      "url": "https://www.berinajumwa.com",
+      "email": "berinakarisa6@gmail.com",
+      "jobTitle": "Founder & Owner",
+      "knowsAbout": [
+        "Spa Management",
+        "Wellness & Hospitality"
+      ],
+      "owns": [
+        {
+          "@id": "https://mnaranicinnamonspa.com/#entity"
+        },
+        {
+          "@id": "https://www.kiluaspa.com/#entity"
+        }
+      ]
+    },
+    {
       "@type": "DaySpa",
       "@id": "https://mnaranicinnamonspa.com/#entity",
       "name": "Mnarani Cinnamon Spa",
       "url": "https://mnaranicinnamonspa.com",
+      "image": "https://mnaranicinnamonspa.com/assets/img/cinnamon-logo.jpeg",
+      "priceRange": "$$",
       "telephone": "+255776583434",
-      "email": "berinakarisa600@gmail.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Mnarani Beach Cottages",
         "addressLocality": "Nungwi",
         "addressCountry": "TZ"
       },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
-          "opens": "09:00",
-          "closes": "19:00"
-        }
-      ],
+      "parentOrganization": {
+        "@id": "https://www.berinajumwa.com/#owner"
+      },
       "sameAs": [
         "https://www.google.com/search?q=mnarani+cinnamon+spa",
         "https://www.instagram.com/mnarani_cinnamon_spa/"
-      ],
+      ]
+    },
+    {
+      "@type": "DaySpa",
+      "@id": "https://www.kiluaspa.com/#entity",
+      "name": "Kilua Spa",
+      "url": "https://www.kiluaspa.com",
+      "image": "https://www.kiluaspa.com/assets/img/kilua-logo.jpeg",
+      "priceRange": "$$",
       "parentOrganization": {
-        "@type": "Person",
-        "@id": "https://www.berinajumwa.com/#owner",
-        "name": "Berina Jumwa",
-        "url": "https://www.berinajumwa.com"
+        "@id": "https://www.berinajumwa.com/#owner"
       }
     }
   ]
